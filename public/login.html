@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username " placeholder ="Enter Username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder ="Enter Password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Mencegah pengiriman form secara default
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            try {
+                // Kirim permintaan login ke server
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password }),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Jika login berhasil, arahkan ke dashboard.html
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Tampilkan pesan error
+                    errorMessage.textContent = result.message || 'Login gagal!';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
+            }
+        });
+    </script>
+</body>
+</html>

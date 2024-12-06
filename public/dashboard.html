@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabel Barang</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="logoutContainer">
+        <a href="index.html">
+            <button id= "logoutButton" action="index.html">Logout</button>
+        </a>
+    </div>
+    <div>
+        <h1 style="text-align: center;" >Daftar Barang</h1>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Cari Barang">
+    </div>
+    <div>
+        <table style= "width:80%" id="myTable">
+        <thead>
+            <tr>
+                <th style= "width:45%;">Nama Barang</th>
+                <th style= "width:10%;">Satuan</th>
+                <th style= "width:15%;">Harga Jual</th>
+                <th style= "width:15%;">Harga Beli</th>
+                <th style= "width:15%;">Margin</th>
+            </tr>
+        </thead>    
+        <tbody id="barang-table">
+            <tr>
+                <td colspan="4">Loading...</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <script>
+        // Mengambil data dari API backend
+        async function fetchBarang() {
+            try {
+                const response = await fetch('http://localhost:3000/api/barang');
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil data');
+                }
+
+                const data = await response.json();
+                const tableBody = document.getElementById('barang-table');
+                tableBody.innerHTML = '';
+
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        const row = `
+                            <tr>
+                                <td>${escapeHtml(item.nama_barang)}</td>
+                                <td>${escapeHtml(item.satuan)}</td>
+                                <td>Rp ${formatCurrency(item.harga_jual)}</td>
+                                <td>Rp ${formatCurrency(item.harga_beli)}</td>
+                                <td>Rp ${formatCurrency(item.margin)}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                } else {
+                    tableBody.innerHTML = '<tr><td colspan="4">Tidak ada data</td></tr>';
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('barang-table').innerHTML = 
+                    '<tr><td colspan="4">Gagal mengambil data</td></tr>';
+            }
+        }
+
+        // Fungsi untuk mencegah XSS (escaping HTML)
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Fungsi untuk format angka menjadi mata uang
+        function formatCurrency(amount) {
+            return amount.toLocaleString('id-ID');
+        }
+
+        // Panggil fungsi fetchBarang saat halaman dimuat
+        fetchBarang();
+        function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+            }
+        }
+        }   
+    </script>
+</body>
+</html>

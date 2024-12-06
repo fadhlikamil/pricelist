@@ -1,0 +1,119 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#myInput {
+display: block; 
+width: 50%; 
+margin: 20px auto; 
+font-size: 16px;
+padding: 12px 20px 12px 40px; 
+border: 2px solid ;
+border-color: #000035;
+border-radius: 4px;
+margin-bottom: 12px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+text-align: center;
+}
+
+#myTable {
+border-collapse: collapse;
+width: 50%;
+margin: 20px auto;
+border: 1px solid #ddd; 
+font-size: 18px;
+}
+
+#myTable th, #myTable td {
+text-align: left; 
+padding: 12px; 
+}
+
+#myTable tr {
+border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+background-color: #f1f1f1;
+}
+#myTable tr:hover {
+background-color: #D6EEEE;
+}
+
+table {
+width: 50%;
+margin: 20px auto;
+border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    background-color: #000035;
+    color: white;
+}
+/* Kontainer untuk tombol login */
+#loginContainer {
+    position: absolute;
+    top: 20px; /* Jarak dari atas */
+    right: 20px; /* Jarak dari kanan */
+}
+
+/* Styling untuk tombol login */
+#loginButton {
+    background-color: #4CAF50; /* Warna hijau */
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#loginButton:hover {
+    background-color: #45a049; /* Warna hijau lebih gelap saat hover */
+    transform: scale(1.05); /* Efek pembesaran */
+}
+
+#loginButton:active {
+    background-color: #3e8e41; /* Warna lebih gelap saat ditekan */
+    transform: scale(0.95); /* Efek sedikit mengecil */
+}
+
+#logoutContainer {
+    position: absolute;
+    top: 20px; /* Jarak dari atas */
+    right: 20px; /* Jarak dari kanan */
+}
+
+/* Styling untuk tombol login */
+#logoutButton {
+    background-color: #ff0d00;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#logoutButton:hover {
+    background-color: #970000; /* Warna hijau lebih gelap saat hover */
+    transform: scale(1.05); /* Efek pembesaran */
+}
+
+#logoutButton:active {
+    background-color: #580000; /* Warna lebih gelap saat ditekan */
+    transform: scale(0.95); /* Efek sedikit mengecil */
+}
